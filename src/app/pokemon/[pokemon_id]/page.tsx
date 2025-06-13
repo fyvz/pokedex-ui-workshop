@@ -7,7 +7,7 @@ import { Row, Col, Container, Image, ProgressBar, Card } from 'react-bootstrap';
 import PokeNavBarNoSearchComp from '@/components/pokeNavBarNoSearchComp';
 import PokemonTypeBadgeComp from '@/components/pokemonTypeBadgeComp';
 import PokemonEvolutionCardComp from '@/components/pokemonEvolutionCardComp';
-import TYPE_COLORS from '@/utils/typeColors';
+// import TYPE_COLORS from '@/utils/typeColors';
 import '../evolutionArrows.css';
 
 

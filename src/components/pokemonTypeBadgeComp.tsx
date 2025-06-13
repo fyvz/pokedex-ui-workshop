@@ -1,7 +1,7 @@
 "use client";
 
 
-import { Badge } from "react-bootstrap";
+// import { Badge } from "react-bootstrap";
 import TYPE_COLORS from "@/utils/typeColors";
 
 
