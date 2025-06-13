@@ -18,8 +18,8 @@ export default function PokemonTypeBadgeComp(props: PokemonCardCompProps) {
                return (
                    <Badge
                        key={index}
-                       style={{ backgroundColor: color }}
-                       className="me-1 text-white"
+                       style={{ backgroundColor: color, color: 'white' }}
+                       className="me-1"
                    >
                        {pokemonType}
                    </Badge>

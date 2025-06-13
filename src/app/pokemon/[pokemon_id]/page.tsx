@@ -50,7 +50,7 @@ export default function PokemonPage({ params }: Params) {
   return (
     <>
       <PokeNavBarNoSearchComp />
-      <Container className="pt-4">
+      <Container className="pt-4" style={{ maxWidth: '1000px' }}>
         <Row className="justify-content-md-center mb-2">
           <Col md="auto">
             <h1>{pokemon?.pokemonName}</h1>
@@ -75,6 +75,7 @@ export default function PokemonPage({ params }: Params) {
                 now={pokemon?.attack || 0}
                 max={150}
                 label={pokemon?.attack?.toString()}
+                striped
                 style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
               />
             </div>
@@ -84,6 +85,7 @@ export default function PokemonPage({ params }: Params) {
                 now={pokemon?.defense || 0}
                 max={180}
                 label={pokemon?.defense?.toString()}
+                striped
                 style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
               />
             </div>
@@ -93,6 +95,7 @@ export default function PokemonPage({ params }: Params) {
                 now={pokemon?.healthPoints || 0}
                 max={250}
                 label={pokemon?.healthPoints?.toString()}
+                striped
                 style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
               />
             </div>
@@ -102,6 +105,7 @@ export default function PokemonPage({ params }: Params) {
                 now={pokemon?.speed || 0}
                 max={150}
                 label={pokemon?.speed?.toString()}
+                striped
                 style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
               />
             </div>
