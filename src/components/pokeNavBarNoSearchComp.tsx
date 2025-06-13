@@ -8,7 +8,7 @@ export default function PokeNavBarNoSearchComp() {
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href='/'>Pokedex</Navbar.Brand>
+        <Navbar.Brand href='/'>The Pokédex Workshop</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href='/'>Home</Nav.Link>
         </Nav>

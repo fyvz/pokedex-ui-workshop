@@ -3,9 +3,10 @@
 'use client'
 import Pokemon from '@/model/pokemon';
 import { useEffect, useState } from 'react';
-import { Row, Col, Container, Image, ProgressBar } from 'react-bootstrap';
+import { Row, Col, Container, Image, ProgressBar, Card } from 'react-bootstrap';
 import PokeNavBarNoSearchComp from '@/components/pokeNavBarNoSearchComp';
 import PokemonTypeBadgeComp from '@/components/pokemonTypeBadgeComp';
+import PokemonEvolutionCardComp from '@/components/pokemonEvolutionCardComp';
 import TYPE_COLORS from '@/utils/typeColors';
 
 
@@ -26,12 +27,14 @@ export default function PokemonPage({ params }: Params) {
   const { pokemon_id } = params;
   // pokemon - A state variable that stores the pokemon information.
   const [pokemon, setPokemon] = useState<Pokemon>();
+  const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
 
 
   useEffect(() => {
     const fetchData = async () => {
       const resp = await fetch('/pokemons.json');
       const data: Pokemon[] = await resp.json();
+      setAllPokemons(data);
       const currentPokemon = data.find(
         (p) => p.pokemonNumber === Number(pokemon_id)
       );
@@ -47,7 +50,7 @@ export default function PokemonPage({ params }: Params) {
   return (
     <>
       <PokeNavBarNoSearchComp />
-      <Container className="pt-4">
+      <Container className="pt-4" style={{ maxWidth: '1000px' }}>
         <Row className="justify-content-md-center mb-2">
           <Col md="auto">
             <h1>{pokemon?.pokemonName}</h1>
@@ -72,6 +75,7 @@ export default function PokemonPage({ params }: Params) {
                 now={pokemon?.attack || 0}
                 max={150}
                 label={pokemon?.attack?.toString()}
+                striped
                 style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
               />
             </div>
@@ -81,6 +85,7 @@ export default function PokemonPage({ params }: Params) {
                 now={pokemon?.defense || 0}
                 max={180}
                 label={pokemon?.defense?.toString()}
+                striped
                 style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
               />
             </div>
@@ -90,6 +95,7 @@ export default function PokemonPage({ params }: Params) {
                 now={pokemon?.healthPoints || 0}
                 max={250}
                 label={pokemon?.healthPoints?.toString()}
+                striped
                 style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
               />
             </div>
@@ -99,22 +105,27 @@ export default function PokemonPage({ params }: Params) {
                 now={pokemon?.speed || 0}
                 max={150}
                 label={pokemon?.speed?.toString()}
+                striped
                 style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
               />
             </div>
           </Col>
         </Row>
         {pokemon?.evolutionFamily?.length ? (
-          <Row>
-            <Col>
+          <Row className="justify-content-center">
+            <Col md="auto" className="text-center">
               <h4 className="mb-2">Evolution</h4>
-              <div>
-                {pokemon.evolutionFamily.map((name, idx) => (
-                  <span key={name} className={name === pokemon.pokemonName ? 'bg-danger text-white p-1' : 'p-1'}>
-                    {name}
-                    {idx < pokemon.evolutionFamily.length - 1 && ' \u2192 '}
-                  </span>
-                ))}
+              <div className="d-flex justify-content-center flex-wrap gap-3">
+                {pokemon.evolutionFamily.map((name) => {
+                  const evo = allPokemons.find((p) => p.pokemonName === name);
+                  return evo ? (
+                    <PokemonEvolutionCardComp key={name} pokemon={evo} />
+                  ) : (
+                    <Card key={name} className="align-items-center p-2">
+                      <Card.Text>{name}</Card.Text>
+                    </Card>
+                  );
+                })}
               </div>
             </Col>
           </Row>
