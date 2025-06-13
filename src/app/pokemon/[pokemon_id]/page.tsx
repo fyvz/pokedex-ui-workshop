@@ -2,12 +2,13 @@
 // Next.js by default would render this content on the server side where the application is hosted.
 'use client'
 import Pokemon from '@/model/pokemon';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import { Row, Col, Container, Image, ProgressBar, Card } from 'react-bootstrap';
 import PokeNavBarNoSearchComp from '@/components/pokeNavBarNoSearchComp';
 import PokemonTypeBadgeComp from '@/components/pokemonTypeBadgeComp';
 import PokemonEvolutionCardComp from '@/components/pokemonEvolutionCardComp';
 import TYPE_COLORS from '@/utils/typeColors';
+import '../evolutionArrows.css';
 
 
 
@@ -116,16 +117,25 @@ export default function PokemonPage({ params }: Params) {
           <Row className="justify-content-center">
             <Col md="auto" className="text-center">
               <h4 className="mb-2">Evolution</h4>
-              <div className="d-flex justify-content-center flex-wrap gap-3">
-                {pokemon.evolutionFamily.map((name) => {
+              <div className="d-flex justify-content-center flex-wrap gap-3 align-items-center">
+                {pokemon.evolutionFamily.map((name, index) => {
                   const evo = allPokemons.find((p) => p.pokemonName === name);
 
-                  return evo ? (
+                  const card = evo ? (
                     <PokemonEvolutionCardComp key={name} pokemon={evo} />
                   ) : (
                     <Card key={name} className="align-items-center p-2">
                       <Card.Text>{name}</Card.Text>
                     </Card>
+                  );
+
+                  return (
+                    <Fragment key={name}>
+                      {card}
+                      {index < pokemon.evolutionFamily.length - 1 && (
+                        <i className="fa-solid fa-arrow-right evolution-arrow" />
+                      )}
+                    </Fragment>
                   );
                 })}
               </div>
