@@ -1,0 +1,12 @@
+:root {
+  --page-background: #222;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+body {
+  background-color: var(--page-background);
+}
+
+.card {
+  box-shadow: var(--card-shadow);
+}
