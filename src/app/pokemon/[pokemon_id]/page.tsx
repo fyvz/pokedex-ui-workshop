@@ -51,7 +51,7 @@ export default function PokemonPage({ params }: Params) {
   return (
     <>
       <PokeNavBarNoSearchComp />
-      <Container className="pt-4" style={{ maxWidth: '1000px' }}>
+      <Container className="pt-4 main-container" style={{ maxWidth: '1000px' }}>
         <Row className="justify-content-md-center mb-2">
           <Col md="auto">
             <h1>{pokemon?.pokemonName}</h1>
@@ -77,7 +77,7 @@ export default function PokemonPage({ params }: Params) {
                 max={150}
                 label={pokemon?.attack?.toString()}
                 striped
-                variant="danger"   
+                variant="danger"
               />
             </div>
             <div className="mb-2">
@@ -117,6 +117,7 @@ export default function PokemonPage({ params }: Params) {
           <Row className="justify-content-center">
             <Col md="auto" className="text-center">
               <h4 className="mb-2">Evolution</h4>
+
               <div className="d-flex justify-content-center flex-wrap gap-3 align-items-center">
                 {pokemon.evolutionFamily.map((name, index) => {
                   const evo = allPokemons.find((p) => p.pokemonName === name);
