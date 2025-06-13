@@ -2,7 +2,7 @@
 // Next.js by default would render this content on the server side where the application is hosted.
 'use client'
 import Pokemon from '@/model/pokemon';
-import { useEffect, useState, Fragment } from 'react';
+import { use, useEffect, useState, Fragment } from 'react';
 import { Row, Col, Container, Image, ProgressBar, Card } from 'react-bootstrap';
 import PokeNavBarNoSearchComp from '@/components/pokeNavBarNoSearchComp';
 import PokemonTypeBadgeComp from '@/components/pokemonTypeBadgeComp';
@@ -13,11 +13,9 @@ import '../evolutionArrows.css';
 
 
 // This type is used to get the pokemon id from the url path
-export type PageProps = {
-  params: { pokemon_id: string };
-};
-
-
+type Params = {
+  params: Promise<{ pokemon_id: string }>
+}
 // Next.js passes the url parts which are defined between square brackets []
 // to the function which renders the page.
 
@@ -25,8 +23,8 @@ export type PageProps = {
 // In our case http://localhost:3000/pokemon/2 is the URL.
 // Where the 2 is the [pokemon_id] and passed as a parameter.
 // Next.js passes the url parts defined between square brackets to the page.
-export default function PokemonPage({ params }: PageProps) {
-  const { pokemon_id } = params;
+export default function PokemonPage({ params }: Params) {
+  const { pokemon_id } = use(params);
   // pokemon - A state variable that stores the pokemon information.
   const [pokemon, setPokemon] = useState<Pokemon>();
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
