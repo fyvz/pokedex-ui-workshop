@@ -38,4 +38,5 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+# Generated declaration file by Next.js
 next-env.d.ts
