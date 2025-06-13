@@ -16,13 +16,13 @@ export default function PokemonTypeBadgeComp(props: PokemonCardCompProps) {
            {props.pokemonTypes?.map((pokemonType, index) => {
                const color = TYPE_COLORS[pokemonType] || 'gray';
                return (
-                   <Badge
-                       key={index}
-                       style={{ backgroundColor: color, color: 'white' }}
-                       className="me-1"
-                   >
-                       {pokemonType}
-                   </Badge>
+                <span
+                key={index}
+                style={{ backgroundColor: color, color: 'white' }}
+                className="badge me-1"   // add the badge class yourself
+                >
+                {pokemonType}
+                </span>
                );
            })}
        </>

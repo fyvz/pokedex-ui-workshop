@@ -76,7 +76,7 @@ export default function PokemonPage({ params }: Params) {
                 max={150}
                 label={pokemon?.attack?.toString()}
                 striped
-                style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
+                variant="danger"   
               />
             </div>
             <div className="mb-2">
@@ -86,7 +86,7 @@ export default function PokemonPage({ params }: Params) {
                 max={180}
                 label={pokemon?.defense?.toString()}
                 striped
-                style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
+                variant='info'
               />
             </div>
             <div className="mb-2">
@@ -96,7 +96,8 @@ export default function PokemonPage({ params }: Params) {
                 max={250}
                 label={pokemon?.healthPoints?.toString()}
                 striped
-                style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
+                variant="success"
+                
               />
             </div>
             <div className="mb-2">
@@ -106,7 +107,7 @@ export default function PokemonPage({ params }: Params) {
                 max={150}
                 label={pokemon?.speed?.toString()}
                 striped
-                style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
+                variant="warning"
               />
             </div>
           </Col>
@@ -118,6 +119,7 @@ export default function PokemonPage({ params }: Params) {
               <div className="d-flex justify-content-center flex-wrap gap-3">
                 {pokemon.evolutionFamily.map((name) => {
                   const evo = allPokemons.find((p) => p.pokemonName === name);
+
                   return evo ? (
                     <PokemonEvolutionCardComp key={name} pokemon={evo} />
                   ) : (
