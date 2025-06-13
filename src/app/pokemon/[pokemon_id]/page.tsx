@@ -13,9 +13,9 @@ import '../evolutionArrows.css';
 
 
 // This type is used to get the pokemon id from the url path
-type Params = {
-  params: { pokemon_id: string }
-}
+export type PageProps = {
+  params: { pokemon_id: string };
+};
 
 
 // Next.js passes the url parts which are defined between square brackets []
@@ -24,7 +24,8 @@ type Params = {
 
 // In our case http://localhost:3000/pokemon/2 is the URL.
 // Where the 2 is the [pokemon_id] and passed as a parameter.
-export default function PokemonPage({ params }: Params) {
+// Next.js passes the url parts defined between square brackets to the page.
+export default function PokemonPage({ params }: PageProps) {
   const { pokemon_id } = params;
   // pokemon - A state variable that stores the pokemon information.
   const [pokemon, setPokemon] = useState<Pokemon>();
