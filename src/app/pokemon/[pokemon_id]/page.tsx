@@ -3,7 +3,10 @@
 'use client'
 import Pokemon from '@/model/pokemon';
 import { useEffect, useState } from 'react';
-import { Row, Col, Container, Image } from 'react-bootstrap';
+import { Row, Col, Container, Image, ProgressBar } from 'react-bootstrap';
+import PokeNavBarNoSearchComp from '@/components/pokeNavBarNoSearchComp';
+import PokemonTypeBadgeComp from '@/components/pokemonTypeBadgeComp';
+import TYPE_COLORS from '@/utils/typeColors';
 
 
 
@@ -42,19 +45,82 @@ export default function PokemonPage({ params }: Params) {
 
 
   return (
-    <Container>
-      <Row className="justify-content-md-center">
-        <Col md="auto">
-          <h1>{pokemon?.pokemonName}</h1>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Image src={pokemon?.mainImage} thumbnail />
-        </Col>
-        <Col>Pokémon Properties</Col>
-      </Row>
-    </Container>
+    <>
+      <PokeNavBarNoSearchComp />
+      <Container className="pt-4">
+        <Row className="justify-content-md-center mb-2">
+          <Col md="auto">
+            <h1>{pokemon?.pokemonName}</h1>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center mb-4">
+          <Col md="auto">
+            {pokemon?.pokemonType && (
+              <PokemonTypeBadgeComp pokemonTypes={pokemon.pokemonType} />
+            )}
+          </Col>
+        </Row>
+        <Row className="mb-4">
+          <Col md="4" className="text-center">
+            <Image src={pokemon?.mainImage} thumbnail />
+          </Col>
+          <Col>
+            <h4 className="mb-3">Stats</h4>
+            <div className="mb-2">
+              <div>Attack</div>
+              <ProgressBar
+                now={pokemon?.attack || 0}
+                max={150}
+                label={pokemon?.attack?.toString()}
+                style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
+              />
+            </div>
+            <div className="mb-2">
+              <div>Defense</div>
+              <ProgressBar
+                now={pokemon?.defense || 0}
+                max={180}
+                label={pokemon?.defense?.toString()}
+                style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
+              />
+            </div>
+            <div className="mb-2">
+              <div>HP</div>
+              <ProgressBar
+                now={pokemon?.healthPoints || 0}
+                max={250}
+                label={pokemon?.healthPoints?.toString()}
+                style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
+              />
+            </div>
+            <div className="mb-2">
+              <div>Speed</div>
+              <ProgressBar
+                now={pokemon?.speed || 0}
+                max={150}
+                label={pokemon?.speed?.toString()}
+                style={{ backgroundColor: TYPE_COLORS[pokemon?.pokemonType?.[0] ?? ''] }}
+              />
+            </div>
+          </Col>
+        </Row>
+        {pokemon?.evolutionFamily?.length ? (
+          <Row>
+            <Col>
+              <h4 className="mb-2">Evolution</h4>
+              <div>
+                {pokemon.evolutionFamily.map((name, idx) => (
+                  <span key={name} className={name === pokemon.pokemonName ? 'bg-danger text-white p-1' : 'p-1'}>
+                    {name}
+                    {idx < pokemon.evolutionFamily.length - 1 && ' \u2192 '}
+                  </span>
+                ))}
+              </div>
+            </Col>
+          </Row>
+        ) : null}
+      </Container>
+    </>
   );
 }
 
